@@ -37,7 +37,7 @@ class LearnMusicTheory(object):
     def __init__(self, verbose=False):
         """Set up cache directory and file and start learning cycle."""
         self.verbose=verbose
-        project_path = sys.argv[0].replace('keys.py','')
+        project_path = sys.argv[0].replace('key_signatures.py','')
         os.makedirs(os.path.join(project_path,"cache"),exist_ok=True)
         self.savepath = os.path.join(project_path,'cache/saved_probability_dict.pkl')
         if os.path.exists(self.savepath):
@@ -165,7 +165,7 @@ class LearnMusicTheory(object):
 
         if self.verbose:
             print("input vs check chord:",inputted_chord, self.chord_dict[self.chosen_key].split(' '))
-        for input_note, reference_note in zip(inputted_chord,self.chord_dict[self.chosen_key].split(' ')):
+        for input_note, reference_note in zip(inputted_chord,self.chord_dict[self.chosen_key].split(' ')[:-1]):
             if input_note.lower() != reference_note.lower():
                 print(f"Incorrect. The answer should be "
                 f"\'{self.chord_dict[self.chosen_key].split(' ')}\', not \'{inputted_chord}\'.")
@@ -237,7 +237,7 @@ class LearnMusicTheory(object):
         self.check_for_quit()
         input_key = self.input.replace(" ",'')
         if input_key != self.chosen_key:
-            print("Incorrect. The answer is {self.chosen_key} not {input_key}.")
+            print(f"Incorrect. The answer is {self.chosen_key} not {input_key}.")
             return False
 
     def start_learn_cycle(self):
